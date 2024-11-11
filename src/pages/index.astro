@@ -1,8 +1,9 @@
 ---
-import { siteConfig } from './config/site';
+import { siteConfig } from '../config/site';
 
 // Improved language detection function
 function getBrowserLanguage(acceptLanguage: string | null): 'en' | 'pl' {
+  console.log(acceptLanguage);
   if (!acceptLanguage) return 'en';
   
   // Parse the Accept-Language header properly
@@ -15,7 +16,7 @@ function getBrowserLanguage(acceptLanguage: string | null): 'en' | 'pl' {
       };
     })
     .sort((a, b) => b.weight - a.weight);
-
+  console.log(languages);
   // Check if Polish is one of the preferred languages
   const prefersPL = languages.some(lang => lang.language === 'pl');
   
@@ -27,5 +28,5 @@ const acceptLanguage = Astro.request.headers.get('accept-language');
 const detectedLang = getBrowserLanguage(acceptLanguage);
 
 // Perform immediate redirect
-return Astro.redirect(`/${detectedLang}`, 307);
+return Astro.redirect(`/${detectedLang}/`, 307);
 ---
