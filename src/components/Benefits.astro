@@ -1,0 +1,74 @@
+---
+const { lang } = Astro.props;
+
+const content = {
+  en: {
+    title: "Why Learn Watercolor Painting?",
+    benefits: [
+      {
+        title: "Stress Relief",
+        description: "Painting helps reduce anxiety and promotes mindfulness"
+      },
+      {
+        title: "Creative Expression",
+        description: "Unlock your artistic potential and develop a new hobby"
+      },
+      {
+        title: "Portable Medium",
+        description: "Easy to carry and practice anywhere"
+      }
+    ]
+  },
+  pl: {
+    title: "Dlaczego Warto Uczyć się Malowania Akwarelą?",
+    benefits: [
+      {
+        title: "Redukcja Stresu",
+        description: "Malowanie pomaga zmniejszyć niepokój i wspiera uważność"
+      },
+      {
+        title: "Ekspresja Twórcza",
+        description: "Odkryj swój potencjał artystyczny i rozwiń nowe hobby"
+      },
+      {
+        title: "Mobilność",
+        description: "Łatwe do przenoszenia i ćwiczenia w dowolnym miejscu"
+      }
+    ]
+  }
+};
+
+const t = content[lang];
+---
+
+<section class="py-24 relative overflow-hidden">
+  <div class="container mx-auto px-4">
+    <div data-scroll>
+      <h2 class="text-4xl font-bold text-center text-[#8B5E34] mb-16 relative inline-block brush-stroke">
+        {t.title}
+      </h2>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-12">
+      {t.benefits.map((benefit, index) => (
+        <div 
+          data-scroll 
+          class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg transform hover:scale-105 transition-transform"
+          style={`animation-delay: ${index * 200}ms`}
+        >
+          <div class="bg-gradient-to-br from-watercolor-terra to-watercolor-rose w-16 h-16 rounded-xl mb-6 animate-float" style={`animation-delay: ${index * 400}ms`}></div>
+          <h3 class="text-2xl font-semibold text-[#8B5E34] mb-4">
+            {benefit.title}
+          </h3>
+          <p class="text-[#A67B5B]">
+            {benefit.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] pointer-events-none opacity-10">
+    <div class="absolute w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-watercolor-sand via-transparent to-transparent animate-pulse"></div>
+  </div>
+</section>

@@ -1,0 +1,94 @@
+---
+const { lang } = Astro.props;
+
+const content = {
+  en: {
+    title: "About the E-book",
+    description: "Your complete guide to mastering watercolor painting",
+    features: [
+      "Step-by-step tutorials for beginners",
+      "Comprehensive materials guide",
+      "30+ practical exercises",
+      "Color theory basics",
+      "Brush technique mastery",
+      "Composition principles"
+    ],
+    audience: {
+      title: "Perfect for you if:",
+      points: [
+        "You're new to watercolor painting",
+        "You want structured learning",
+        "You're looking for expert guidance",
+        "You prefer learning at your own pace"
+      ]
+    }
+  },
+  pl: {
+    title: "O E-booku",
+    description: "Twój kompletny przewodnik do opanowania malowania akwarelą",
+    features: [
+      "Tutoriale krok po kroku dla początkujących",
+      "Kompleksowy przewodnik po materiałach",
+      "Ponad 30 praktycznych ćwiczeń",
+      "Podstawy teorii koloru",
+      "Techniki pędzla",
+      "Zasady kompozycji"
+    ],
+    audience: {
+      title: "Idealny dla Ciebie, jeśli:",
+      points: [
+        "Zaczynasz przygodę z akwarelą",
+        "Szukasz uporządkowanej nauki",
+        "Potrzebujesz eksperckiego prowadzenia",
+        "Preferujesz naukę we własnym tempie"
+      ]
+    }
+  }
+};
+
+const t = content[lang];
+---
+
+<section class="py-20 bg-gradient-to-b from-watercolor-cream to-white">
+  <div class="container mx-auto px-4">
+    <div data-scroll>
+      <h2 class="text-4xl font-bold text-center text-watercolor-brown mb-8 brush-stroke inline-block">
+        {t.title}
+      </h2>
+      <p class="text-xl text-center text-watercolor-brown-light mb-12 max-w-2xl mx-auto">
+        {t.description}
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-12">
+      <div data-scroll class="watercolor-card p-8">
+        <ul class="space-y-4">
+          {t.features.map(feature => (
+            <li class="flex items-center">
+              <svg class="w-6 h-6 text-watercolor-brown mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-watercolor-brown-light">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div data-scroll class="watercolor-card p-8">
+        <h3 class="text-2xl font-semibold text-watercolor-brown mb-6">
+          {t.audience.title}
+        </h3>
+        <ul class="space-y-4">
+          {t.audience.points.map(point => (
+            <li class="flex items-center">
+              <svg class="w-6 h-6 text-watercolor-brown mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4"></path>
+              </svg>
+              <span class="text-watercolor-brown-light">{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

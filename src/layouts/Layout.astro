@@ -1,0 +1,122 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  lang: 'en' | 'pl';
+}
+
+const { title, description, lang } = Astro.props;
+
+const socialImage = '/images/social-preview.jpg';
+const domain = 'https://watercolor-with-iwa.com';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={domain} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${domain}${socialImage}`} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={domain} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${domain}${socialImage}`} />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="/favicon.svg">
+  </head>
+  <body class="min-h-screen bg-gradient-to-b from-watercolor-cream via-white to-watercolor-rose font-sans text-watercolor-brown">
+    <div class="watercolor-bg"></div>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  .watercolor-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(245, 230, 211, 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(255, 228, 230, 0.4) 0%, transparent 30%),
+      radial-gradient(circle at 50% 60%, rgba(230, 201, 168, 0.4) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .btn-watercolor {
+    @apply inline-block px-8 py-4 text-lg font-semibold rounded-full
+           bg-gradient-to-r from-watercolor-brown to-watercolor-brown-dark text-white
+           shadow-md hover:shadow-lg transform hover:-translate-y-0.5
+           border-2 border-white/20 backdrop-blur-sm
+           transition-all duration-300 relative overflow-hidden;
+  }
+
+  .btn-watercolor::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0
+           -translate-x-full hover:translate-x-full transition-transform duration-700;
+  }
+
+  .watercolor-card {
+    @apply bg-white/90 backdrop-blur-sm rounded-xl shadow-md
+           hover:shadow-lg transition-all duration-300
+           border border-watercolor-beige/20;
+  }
+
+  .brush-stroke {
+    @apply relative inline-block;
+  }
+
+  .brush-stroke::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-full h-0.5
+           bg-gradient-to-r from-watercolor-terra to-watercolor-rose
+           transform origin-left animate-paint-splash;
+  }
+
+  [data-scroll] {
+    @apply opacity-0 translate-y-4 animate-paint-splash;
+  }
+</style>
+
+<script>
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('[data-scroll]').forEach(element => {
+    observer.observe(element);
+  });
+</script>

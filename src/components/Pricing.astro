@@ -1,0 +1,73 @@
+---
+const { lang } = Astro.props;
+
+const content = {
+  en: {
+    title: "Start Your Watercolor Journey Today",
+    regularPrice: "$49.99",
+    specialPrice: "$29.99",
+    savings: "Save 40%",
+    features: [
+      "Lifetime access to all content",
+      "30+ step-by-step exercises",
+      "My personal materials guide & recommendations",
+      "Bonus: Color mixing charts"
+    ],
+    cta: "Get Started Now"
+  },
+  pl: {
+    title: "Rozpocznij Swoją Przygodę z Akwarelą",
+    regularPrice: "199 zł",
+    specialPrice: "119 zł",
+    savings: "Oszczędź 40%",
+    features: [
+      "Dożywotni dostęp do treści",
+      "Ponad 30 ćwiczeń krok po kroku",
+      "Mój osobisty przewodnik po materiałach",
+      "Bonus: Tabele mieszania kolorów"
+    ],
+    cta: "Rozpocznij Teraz"
+  }
+};
+
+const t = content[lang];
+---
+
+<section class="py-20 bg-gradient-to-b from-watercolor-cream to-white">
+  <div class="container mx-auto px-4">
+    <div class="max-w-2xl mx-auto watercolor-card overflow-hidden">
+      <div class="bg-gradient-to-r from-watercolor-brown to-watercolor-brown-dark p-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">{t.title}</h2>
+        <div class="flex justify-center items-center gap-4">
+          <span class="text-watercolor-sand/80 line-through">{t.regularPrice}</span>
+          <span class="text-4xl font-bold text-white">{t.specialPrice}</span>
+          <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm">
+            {t.savings}
+          </span>
+        </div>
+      </div>
+      
+      <div class="p-8 bg-white/90">
+        <ul class="space-y-4 mb-8">
+          {t.features.map(feature => (
+            <li class="flex items-center">
+              <svg class="w-6 h-6 text-watercolor-brown mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-watercolor-brown-light">{feature}</span>
+            </li>
+          ))}
+        </ul>
+        
+        <div class="text-center">
+          <a
+            href={`/${lang}/order`}
+            class="btn-watercolor w-full"
+          >
+            {t.cta}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

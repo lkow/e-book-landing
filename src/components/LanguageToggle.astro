@@ -1,0 +1,51 @@
+---
+const { currentLang } = Astro.props;
+---
+
+<button
+  id="langToggle"
+  class="fixed top-4 right-4 bg-gradient-to-r from-watercolor-beige to-watercolor-beige-dark text-watercolor-brown 
+         px-4 py-2 rounded-full hover:shadow-lg transition-all duration-300 z-50 
+         backdrop-blur-sm font-medium flex items-center gap-2 group"
+  data-current-lang={currentLang}
+>
+  <span class="relative">
+    {currentLang === 'en' ? 'Polski' : 'English'}
+    <span class="absolute inset-x-0 -bottom-0.5 h-px bg-gradient-to-r from-watercolor-terra to-watercolor-rose 
+                 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+    </span>
+  </span>
+  <svg 
+    class="w-4 h-4 transform group-hover:rotate-180 transition-transform duration-300" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24"
+  >
+    <path 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="2" 
+      d="M19 9l-7 7-7-7"
+    />
+  </svg>
+</button>
+
+<script>
+  const toggle = document.getElementById('langToggle');
+  toggle?.addEventListener('click', () => {
+    const currentLang = toggle.getAttribute('data-current-lang');
+    const newLang = currentLang === 'en' ? 'pl' : 'en';
+    window.location.href = `/${newLang}`;
+  });
+</script>
+
+<style>
+  #langToggle {
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));
+  }
+
+  #langToggle:hover {
+    filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) 
+           drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  }
+</style>

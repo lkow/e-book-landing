@@ -1,0 +1,94 @@
+---
+const { lang } = Astro.props;
+
+const content = {
+  en: {
+    title: "Preview What's Inside",
+    description: "Take a peek at some of the content you'll find in the e-book",
+    chapters: [
+      {
+        title: "Getting Started",
+        preview: "Learn about essential materials and basic techniques",
+        image: "/images/chapter1.jpg"
+      },
+      {
+        title: "Color Theory",
+        preview: "Master color mixing and palette creation",
+        image: "/images/chapter2.jpg"
+      },
+      {
+        title: "Basic Techniques",
+        preview: "Practice fundamental watercolor techniques",
+        image: "/images/chapter3.jpg"
+      }
+    ],
+    cta: "Get Full Access Now"
+  },
+  pl: {
+    title: "Zobacz Co Znajdziesz W Środku",
+    description: "Zobacz przykładową zawartość e-booka",
+    chapters: [
+      {
+        title: "Pierwsze Kroki",
+        preview: "Poznaj niezbędne materiały i podstawowe techniki",
+        image: "/images/chapter1.jpg"
+      },
+      {
+        title: "Teoria Koloru",
+        preview: "Opanuj mieszanie kolorów i tworzenie palety",
+        image: "/images/chapter2.jpg"
+      },
+      {
+        title: "Podstawowe Techniki",
+        preview: "Ćwicz fundamentalne techniki akwarelowe",
+        image: "/images/chapter3.jpg"
+      }
+    ],
+    cta: "Uzyskaj Pełny Dostęp"
+  }
+};
+
+const t = content[lang];
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div data-scroll>
+      <h2 class="text-4xl font-bold text-center text-watercolor-brown mb-4 brush-stroke inline-block">
+        {t.title}
+      </h2>
+      <p class="text-xl text-center text-watercolor-brown-light mb-12">
+        {t.description}
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+      {t.chapters.map((chapter, index) => (
+        <div 
+          data-scroll 
+          class="watercolor-card overflow-hidden"
+          style={`animation-delay: ${index * 200}ms`}
+        >
+          <div class="h-48 bg-gradient-to-br from-watercolor-sand to-watercolor-rose animate-watercolor-flow"></div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-watercolor-brown mb-2">
+              {chapter.title}
+            </h3>
+            <p class="text-watercolor-brown-light">
+              {chapter.preview}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="text-center" data-scroll>
+      <a
+        href={`/${lang}/order`}
+        class="btn-watercolor"
+      >
+        {t.cta}
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import LanguageToggle from '../../components/LanguageToggle.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'pl' } }
+  ];
+}
+
+const { lang } = Astro.params;
+
+const content = {
+  en: {
+    title: "Complete Your Purchase",
+    description: "Get instant access to the complete watercolor course",
+    processing: "Processing your order...",
+    redirect: "You'll be redirected to the payment processor shortly."
+  },
+  pl: {
+    title: "Finalizacja Zakupu",
+    description: "Uzyskaj natychmiastowy dostęp do kompletnego kursu akwareli",
+    processing: "Przetwarzanie zamówienia...",
+    redirect: "Za chwilę nastąpi przekierowanie do systemu płatności."
+  }
+};
+
+const t = content[lang];
+---
+
+<Layout 
+  title={t.title} 
+  description={t.description}
+  lang={lang}
+>
+  <LanguageToggle currentLang={lang} />
+  
+  <main class="min-h-screen flex items-center justify-center p-4">
+    <div class="watercolor-card p-8 max-w-md w-full text-center">
+      <div class="animate-pulse space-y-4">
+        <h1 class="text-2xl font-bold text-watercolor-brown mb-4">{t.processing}</h1>
+        <p class="text-watercolor-brown-light">{t.redirect}</p>
+        <div class="w-12 h-12 mx-auto border-4 border-watercolor-terra border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    </div>
+  </main>
+
+  <Footer lang={lang} />
+</Layout>

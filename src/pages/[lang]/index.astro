@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Benefits from '../../components/Benefits.astro';
+import About from '../../components/About.astro';
+import Preview from '../../components/Preview.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import InstagramFeed from '../../components/InstagramFeed.astro';
+import Pricing from '../../components/Pricing.astro';
+import Footer from '../../components/Footer.astro';
+import LanguageToggle from '../../components/LanguageToggle.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'pl' } }
+  ];
+}
+
+const { lang } = Astro.params;
+
+const titles = {
+  en: "Mastering Watercolor: A Complete Beginner's Guide",
+  pl: "Mistrzowska Akwarela: Kompletny Przewodnik dla Początkujących"
+};
+
+const descriptions = {
+  en: "Learn watercolor painting from scratch with my comprehensive e-book guide. Perfect for beginners with step-by-step instructions and exercises.",
+  pl: "Naucz się malowania akwarelą od podstaw z moim kompleksowym e-bookiem. Idealny dla początkujących z instrukcjami krok po kroku i ćwiczeniami."
+};
+---
+
+<Layout title={titles[lang]} description={descriptions[lang]} lang={lang}>
+  <LanguageToggle currentLang={lang} />
+  <Hero lang={lang} />
+  <Benefits lang={lang} />
+  <About lang={lang} />
+  <Preview lang={lang} />
+  <Testimonials lang={lang} />
+  
+  <Pricing lang={lang} />
+  <Footer lang={lang} />
+</Layout>

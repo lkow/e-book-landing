@@ -1,0 +1,83 @@
+---
+const { lang } = Astro.props;
+
+const content = {
+  en: {
+    title: "What My Students Say",
+    testimonials: [
+      {
+        name: "Sarah Johnson",
+        role: "Beginner Artist",
+        text: "Iwa's e-book made starting with watercolors so much less intimidating. Her step-by-step approach really works!",
+        image: "/images/testimonial1.jpg"
+      },
+      {
+        name: "Michael Chen",
+        role: "Hobby Painter",
+        text: "Her materials guide alone saved me from making costly mistakes. An excellent resource for beginners.",
+        image: "/images/testimonial2.jpg"
+      },
+      {
+        name: "Emma Wilson",
+        role: "Art Student",
+        text: "Iwa's clear instructions and practical exercises helped me develop proper techniques from the start.",
+        image: "/images/testimonial3.jpg"
+      }
+    ]
+  },
+  pl: {
+    title: "Co Mówią Moi Uczniowie",
+    testimonials: [
+      {
+        name: "Anna Kowalska",
+        role: "Początkująca Artystka",
+        text: "E-book Iwy sprawił, że rozpoczęcie przygody z akwarelami było znacznie mniej onieśmielające.",
+        image: "/images/testimonial1.jpg"
+      },
+      {
+        name: "Piotr Nowak",
+        role: "Malarz Amator",
+        text: "Sam jej przewodnik po materiałach uchronił mnie przed kosztownymi błędami. Świetne źródło dla początkujących.",
+        image: "/images/testimonial2.jpg"
+      },
+      {
+        name: "Maja Wiśniewska",
+        role: "Studentka Sztuki",
+        text: "Jasne instrukcje i praktyczne ćwiczenia Iwy pomogły mi rozwinąć właściwe techniki od samego początku.",
+        image: "/images/testimonial3.jpg"
+      }
+    ]
+  }
+};
+
+const t = content[lang];
+---
+
+<section class="py-20 bg-gradient-to-b from-white to-watercolor-cream">
+  <div class="container mx-auto px-4">
+    <div data-scroll>
+      <h2 class="text-4xl font-bold text-center text-watercolor-brown mb-12 brush-stroke inline-block">
+        {t.title}
+      </h2>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {t.testimonials.map((testimonial, index) => (
+        <div 
+          data-scroll 
+          class="watercolor-card p-6"
+          style={`animation-delay: ${index * 200}ms`}
+        >
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-watercolor-sand to-watercolor-rose rounded-full mr-4"></div>
+            <div>
+              <h3 class="font-semibold text-watercolor-brown">{testimonial.name}</h3>
+              <p class="text-sm text-watercolor-brown-light">{testimonial.role}</p>
+            </div>
+          </div>
+          <p class="text-watercolor-brown-light italic">"{testimonial.text}"</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
