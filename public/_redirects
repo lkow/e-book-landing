@@ -1,0 +1,11 @@
+# Language-based redirects
+/  /en  302  Language=en
+/  /pl  302  Language=pl
+/  /en  302  # Default fallback
+
+# Handle SPA routes
+/en/*   /en/index.html   200
+/pl/*   /pl/index.html   200
+
+# Ensure all other routes are handled by the SPA
+/*  /index.html  200
