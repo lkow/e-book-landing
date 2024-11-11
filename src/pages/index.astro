@@ -1,19 +1,3 @@
----
-import { useEffect } from 'astro/jsx-runtime';
-
-useEffect(() => {
-    if (typeof window !== 'undefined') {
-        // Run client-side redirection logic
-        const userLang = navigator.language || navigator.userLanguage;
-        if (userLang.startsWith('pl')) {
-            window.location.replace('/pl');
-        } else {
-            window.location.replace('/en');
-        }
-    }
-});
----
-
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -21,6 +5,17 @@ useEffect(() => {
         <title>Mastering Watercolor: A Complete Beginner's Guide</title>
     </head>
     <body>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Redirect based on the browser's preferred language
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('pl')) {
+                window.location.replace('/pl');
+            } else {
+                window.location.replace('/en');
+            }
+        });
+    </script>
         <h1>Welcome!</h1>
         <p>If you are not redirected, please choose your preferred language:</p>
         <a href="/en">English</a> | <a href="/pl">Polski</a>
