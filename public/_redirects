@@ -1,7 +1,7 @@
 # Language-based redirects
-/  /en  302  Language=en
-/  /pl  302  Language=pl
-/  /en  302  # Default fallback
+/  /pl  302!  Language=pl
+/  /en  302!  Language=en
+/  /en  302!  # Default fallback if no language is matched
 
 # Handle SPA routes
 /en/*   /en/index.html   200

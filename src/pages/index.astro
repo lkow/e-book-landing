@@ -1,4 +1,28 @@
 ---
-// Simple default redirect to English version
-return Astro.redirect('/en', 307);
+import { useEffect } from 'astro/jsx-runtime';
+
+useEffect(() => {
+    if (typeof window !== 'undefined') {
+        // Run client-side redirection logic
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith('pl')) {
+            window.location.replace('/pl');
+        } else {
+            window.location.replace('/en');
+        }
+    }
+});
 ---
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mastering Watercolor: A Complete Beginner's Guide</title>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+        <p>If you are not redirected, please choose your preferred language:</p>
+        <a href="/en">English</a> | <a href="/pl">Polski</a>
+    </body>
+</html>
